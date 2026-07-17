@@ -50,45 +50,112 @@
 
 //MAJORITY ELEMENT OPTIMAL APPROACH 
 
+// #include <iostream>
+// #include <vector>
+// using namespace std;
+
+// int main(){
+//     vector<int> nums={1, 2, 1, 1, 3, 2};
+//     int n=nums.size();
+//     //since there can be two elements more than n/3 in an array unlike n/2 where only 1 element can be more thn n/2.
+
+//     int cnt1=0; int el1; int cnt2=0; int el2;
+    
+//         /*Find the potential candidates using
+//         Boyer Moore's Voting Algorithm*/
+//         for (int i = 0; i < n; i++) {
+            
+//             if (cnt1 == 0 && el2 != nums[i]) {
+//                 cnt1++;
+//                 // Initialize el1 as nums[i]
+//                 el1 = nums[i]; 
+//             }
+//             else if (cnt2 == 0 && el1 != nums[i]) {
+//                 cnt2++;
+//                 // Initialize el2 as nums[i]
+//                 el2 = nums[i]; 
+//             } 
+//             else if (nums[i] == el1) {
+//                 // Increment count for el1
+//                 cnt1++;
+//             } 
+//             else if (nums[i] == el2) {
+//                 // Increment count for el2
+//                 cnt2++; 
+//             } 
+//             else {
+//                 // Decrement count for el1
+//                 cnt1--; 
+//                  // Decrement count for el2
+//                 cnt2--;
+//             }
+//         }
+
+// }
+
+
+
+
+//3 SUM 
+
+// #include <iostream>
+// #include <vector>
+// #include <map>
+// #include <set>
+// #include <algorithm>
+// using namespace std;
+
+// int main(){
+//     vector<int> arr={-1,0,1,2,-1,-4};  // -4 -1 -1 2 1 2 
+//     set<vector<int>> res;   
+//     int num1; int num2; int num3;
+
+//     for(int i=0;i<arr.size();i++){
+//         for(int j=i+1;j<arr.size();j++){
+//             for(int k=j+1;k<arr.size();k++){
+//                 if(i!=j&&j!=k&&k!=i){
+//                     if(arr[i]+arr[j]+arr[k]==0){
+//                         vector<int> temp={arr[i],arr[j],arr[k]};
+//                         sort(temp.begin(),temp.end());                 
+//                         res.insert(temp);
+//                     }
+//                 }
+//             }
+//         }
+
+//     }
+//            // Convert set to vector
+//         vector<vector<int>> ans(res.begin(), res.end());
+    
+//     for(int i=0;i<ans.size();i++){
+//         for(int j=0;j<ans[i].size();j++){
+//             cout<<ans[i][j]<<',';
+//         }
+//         cout<<'\n';
+//     }
+
+// }
+
+
 #include <iostream>
+#include <set>
+#include <map>
 #include <vector>
 using namespace std;
 
 int main(){
-    vector<int> nums={1, 2, 1, 1, 3, 2};
-    int n=nums.size();
-    //since there can be two elements more than n/3 in an array unlike n/2 where only 1 element can be more thn n/2.
+    vector<int> arr={-1,0,1,2,-1,-4};
+    set<vector<int>> res;
+    set<int>count;
 
-    int cnt1=0; int el1; int cnt2=0; int el2;
-    
-        /*Find the potential candidates using
-        Boyer Moore's Voting Algorithm*/
-        for (int i = 0; i < n; i++) {
-            
-            if (cnt1 == 0 && el2 != nums[i]) {
-                cnt1++;
-                // Initialize el1 as nums[i]
-                el1 = nums[i]; 
-            }
-            else if (cnt2 == 0 && el1 != nums[i]) {
-                cnt2++;
-                // Initialize el2 as nums[i]
-                el2 = nums[i]; 
-            } 
-            else if (nums[i] == el1) {
-                // Increment count for el1
-                cnt1++;
-            } 
-            else if (nums[i] == el2) {
-                // Increment count for el2
-                cnt2++; 
-            } 
-            else {
-                // Decrement count for el1
-                cnt1--; 
-                 // Decrement count for el2
-                cnt2--;
-            }
+    for(int i=0;i<arr.size();i++){
+        for(int j=i+1;j<arr.size();j++){
+            int value=-(arr[i]+arr[j]);
+            if()
+
         }
+    }
+
+
 
 }
