@@ -137,25 +137,123 @@
 // }
 
 
+// #include <iostream>
+// #include <algorithm>
+// #include <set>
+// #include <map>
+// #include <vector>
+// using namespace std;
+
+// int main(){
+//     vector<int> arr={0,0,0};
+//     set<vector<int>> res;
+
+//     for(int i=0;i<arr.size();i++){
+//         set<int> count;
+//         for(int j=i+1;j<arr.size();j++){
+//             int value=-(arr[i]+arr[j]);
+//             if(count.find(value)!=count.end()){
+//                 vector<int> temp={arr[i],arr[j],value};
+//                 sort(temp.begin(),temp.end());                 
+//                 res.insert(temp);                
+//             }
+//             else{
+//                 count.insert(arr[j]);
+//             }
+//         }
+//     }
+//     // Convert set to vector
+//     vector<vector<int>> ans(res.begin(), res.end());
+    
+//     for(int i=0;i<ans.size();i++){
+//         for(int j=0;j<ans[i].size();j++){ 
+//             cout<<ans[i][j]<<',';
+//         }
+//         cout<<'\n';
+//     }
+// }
+
+
+//4SUM
+
+// #include <iostream>
+// #include <map>
+// #include <set>
+// #include <vector>
+// #include <algorithm>
+// using namespace std;
+
+
+// int main(){
+//     vector<int> arr={1,0,-1,0,-2,2};
+//     set<vector<int>> res;
+//     int target=0;
+
+
+//     for(int i=0;i<arr.size();i++){
+//         for(int j=i+1;j<arr.size();j++){
+//             for(int k=j+1;k<arr.size();k++){
+//                 for(int l=k+1;l<arr.size();l++){
+//                     int sum=arr[i]+arr[j]+arr[k]+arr[l];
+//                     if(sum==target){
+//                         vector<int> temp={arr[i],arr[j],arr[k],arr[l]};
+//                         sort(temp.begin(),temp.end());
+//                         res.insert(temp);
+//                     }
+//                 }
+//             }
+//         }
+//     }
+
+//     //convert set to vector
+//     vector<vector<int>> ans(res.begin(),res.end());
+
+//     for(int i=0;i<ans.size();i++){
+//         for(int j=0;j<ans[i].size();j++){
+//             cout<<ans[i][j]<<',';
+//         }
+//         cout<<'\n';
+//     }
+// }
+
+
 #include <iostream>
-#include <set>
-#include <map>
 #include <vector>
+#include <map>
+#include <set>
+#include <vector>
+#include <algorithm>
 using namespace std;
 
 int main(){
-    vector<int> arr={-1,0,1,2,-1,-4};
+    vector<int> arr={1,0,-1,0,-2,2};
     set<vector<int>> res;
-    set<int>count;
+    int target=0;
+
 
     for(int i=0;i<arr.size();i++){
+                    set<int> count;
         for(int j=i+1;j<arr.size();j++){
-            int value=-(arr[i]+arr[j]);
-            if()
-
+            for(int k=j+1;k<arr.size();k++){
+                int val=target-(arr[i]+arr[j]+arr[k]);
+                if(count.find(val)!=count.end()){
+                    vector<int> temp={arr[i],arr[j],arr[k],val};
+                    sort(temp.begin(),temp.end());
+                    res.insert(temp);
+                }
+                else{
+                    count.insert(arr[k]);
+                }
+            }
         }
     }
+    //convert set to vector
+    vector<vector<int>> ans(res.begin(),res.end());
 
-
-
+    for(int i=0;i<ans.size();i++){
+        for(int j=0;j<ans[i].size();j++){
+            cout<<ans[i][j]<<',';
+        }
+        cout<<'\n';
+    }
 }
