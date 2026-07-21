@@ -217,43 +217,206 @@
 // }
 
 
+// #include <iostream>
+// #include <vector>
+// #include <map>
+// #include <set>
+// #include <vector>
+// #include <algorithm>
+// using namespace std;
+
+// int main(){
+//     vector<int> arr={1,0,-1,0,-2,2};
+//     set<vector<int>> res;
+//     int target=0;
+
+
+//     for(int i=0;i<arr.size();i++){
+//                     set<int> count;
+//         for(int j=i+1;j<arr.size();j++){
+//             for(int k=j+1;k<arr.size();k++){
+//                 int val=target-(arr[i]+arr[j]+arr[k]);
+//                 if(count.find(val)!=count.end()){
+//                     vector<int> temp={arr[i],arr[j],arr[k],val};
+//                     sort(temp.begin(),temp.end());
+//                     res.insert(temp);
+//                 }
+//                 else{
+//                     count.insert(arr[k]);
+//                 }
+//             }
+//         }
+//     }
+//     //convert set to vector
+//     vector<vector<int>> ans(res.begin(),res.end());
+
+//     for(int i=0;i<ans.size();i++){
+//         for(int j=0;j<ans[i].size();j++){
+//             cout<<ans[i][j]<<',';
+//         }
+//         cout<<'\n';
+//     }
+// }
+
+
+//3 SUM POINTER
+
+// #include <iostream>
+// #include <algorithm>
+// #include <map>
+// #include <set>
+// #include <vector>
+// using namespace std;
+
+// int main(){
+//     vector<int> arr={-1,0,1,2,-1,-4};
+//     set<vector<int>> res;
+
+//     sort(arr.begin(),arr.end());
+
+//     for(int i=0;i<arr.size();i++){
+//         int left=i+1;
+//         int right=arr.size()-1;
+//         while(left<right){
+//             int sum=arr[i]+arr[left]+arr[right];
+//             if(sum>0){
+//                 right--;
+//             }
+//             if(sum<0){
+//                 left++;
+//             }
+//             if(sum==0){
+//                 vector<int> temp={arr[i],arr[left],arr[right]};
+//                 sort(temp.begin(),temp.end());
+//                 left++;
+//                 right--;
+//                 res.insert(temp);
+//             }
+//         }
+//     }
+
+//     //convert set to vector
+
+//     vector<vector<int>> ans(res.begin(),res.end());
+
+//     for(int i=0;i<ans.size();i++){
+//         for(int j=0;j<ans[i].size();j++){
+//             cout<<ans[i][j]<<',';
+//         }
+//         cout<<'\n';
+//     }
+// }
+
+
+//4SUM POINTER
+
+// #include <iostream>
+// #include <vector>
+// #include <set>
+// #include <algorithm>
+// #include <map>
+// using namespace std;
+
+// int main(){
+//     vector<int> arr={-1,0,1,2,-1,-4,4,5,7,-7,3,-5};
+
+//     //first sort to use two pointers
+//     sort(arr.begin(),arr.end());
+
+//     set<vector<int>> res;
+
+//     for(int i=0;i<arr.size();i++){
+//         for(int j=i+1;j<arr.size();j++){
+//             int left=j+1;
+//             int right=arr.size()-1;
+//             while(left<right){
+//                 int sum=arr[i]+arr[j]+arr[left]+arr[right];
+//                 if(sum>0){
+//                     right--;
+//                 }
+//                 if(sum<0){
+//                     left++;
+//                 }
+//                 if(sum==0){
+//                     vector<int> temp={arr[i],arr[j],arr[left],arr[right]};
+//                     sort(temp.begin(),temp.end());
+//                     res.insert(temp);
+//                     left++;
+//                     right--;
+//                 }
+//             }
+//         }
+//     }
+
+//     //comvert set back to vector
+//     vector<vector<int>> ans(res.begin(),res.end());
+
+//     for(int i=0;i<ans.size();i++){
+//         for(int j=0;j<ans[i].size();j++){
+//             cout<<ans[i][j]<<',';
+//         }
+//         cout<<'\n';
+//     }
+
+// }
+
+
+//Length of the longest subarray with zero Sum
+
+
+// #include <iostream>
+// #include <vector>
+// #include <algorithm>
+// using namespace std;
+
+
+// int main(){
+//     vector<int> arr={9, -3, 3, -1, 6, -5};
+//     int sum=0; int count=0; 
+
+//     for(int i=0;i<arr.size();i++){ 
+//         sum=0; 
+//         sum+=arr[i];
+//         for(int j=i+1;j<arr.size();j++){
+//             sum+=arr[j];
+//             if(sum==0){
+//                 count=max(j-i+1,count);    
+//             }
+//         }
+//     }
+
+//     cout<<count;
+// }
+
+
+//OPTIMAL APPROACH 
+
 #include <iostream>
-#include <vector>
-#include <map>
-#include <set>
-#include <vector>
 #include <algorithm>
+#include <map>
+#include <vector>
 using namespace std;
 
-int main(){
-    vector<int> arr={1,0,-1,0,-2,2};
-    set<vector<int>> res;
-    int target=0;
 
+int main(){
+    vector<int> arr={9, -3, 3, -1, 6};
+
+    //initialize a map
+    map<int,int> cnt;
+    int sum=0; int count=0;
 
     for(int i=0;i<arr.size();i++){
-                    set<int> count;
-        for(int j=i+1;j<arr.size();j++){
-            for(int k=j+1;k<arr.size();k++){
-                int val=target-(arr[i]+arr[j]+arr[k]);
-                if(count.find(val)!=count.end()){
-                    vector<int> temp={arr[i],arr[j],arr[k],val};
-                    sort(temp.begin(),temp.end());
-                    res.insert(temp);
-                }
-                else{
-                    count.insert(arr[k]);
-                }
-            }
+        sum+=arr[i];
+        if(sum==0){
+            count=i+1;
+        }
+        if(cnt.find(sum)!=cnt.end()){
+            count=i-cnt[sum];
+        }
+        else{
+            cnt.insert({sum,i});             //sum with current index
         }
     }
-    //convert set to vector
-    vector<vector<int>> ans(res.begin(),res.end());
 
-    for(int i=0;i<ans.size();i++){
-        for(int j=0;j<ans[i].size();j++){
-            cout<<ans[i][j]<<',';
-        }
-        cout<<'\n';
-    }
+    cout<<count;
 }
