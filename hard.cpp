@@ -391,32 +391,117 @@
 
 //OPTIMAL APPROACH 
 
+// #include <iostream>
+// #include <algorithm>
+// #include <map>
+// #include <vector>
+// using namespace std;
+
+
+// int main(){
+//     vector<int> arr={9, -3, 3, -1, 6};
+
+//     //initialize a map
+//     map<int,int> cnt;
+//     int sum=0; int count=0;
+
+//     for(int i=0;i<arr.size();i++){
+//         sum+=arr[i];
+//         if(sum==0){
+//             count=i+1;
+//         }
+//         if(cnt.find(sum)!=cnt.end()){
+//             count=i-cnt[sum];
+//         }
+//         else{
+//             cnt.insert({sum,i});             //sum with current index
+//         }
+//     }
+
+//     cout<<count;
+// }
+
+
+// Given an array of integers A and an integer B. Find the total number of subarrays having bitwise XOR of all elements equal to k.
+
+// #include <map>
+// #include <iostream>
+// #include <set>
+// #include <vector>
+// using  namespace std;
+
+// int main(){
+//     vector<int> arr={4, 2, 2, 6, 4};
+//     int sum=0; int k=6; int count=0;
+
+//     for(int i=0;i<arr.size();i++){
+//         sum=0;
+//         for(int j=i;j<arr.size();j++){
+//             sum^=arr[j];
+//             if(sum==k){
+//                 count++;
+//             }
+//         }
+//     }
+
+//     cout<<count;
+// }
+
+//OPTIMAL APPROACH
+
+// #include <map>
+// #include <vector>
+// #include <iostream>
+// using namespace std;
+
+// int main(){
+//     vector<int> arr={4, 2, 2, 6, 4};
+//     int sum=0; int count=0; int k=6;
+
+//     //intialize map same as prefix arr
+//     map<int,int> cnt={{0,1}};
+
+//     for(int i=0;i<arr.size();i++){
+//         sum^=arr[i];
+//         if(cnt.find(k^sum)!=cnt.end()){
+//             count+=cnt[k^sum];            //////////////why k^sum bro?????
+//         }
+//         cnt[sum]++;
+//     }
+//     cout<<count;
+// }
+
+
+
+//Merge Overlapping Sub-intervals
+
+//  Given an array of intervals where intervals[i] = [starti, endi], merge all overlapping intervals and return an array of the non-overlapping intervals that cover all the intervals in the input
+
+
 #include <iostream>
-#include <algorithm>
-#include <map>
 #include <vector>
+#include <algorithm>
 using namespace std;
 
-
 int main(){
-    vector<int> arr={9, -3, 3, -1, 6};
 
-    //initialize a map
-    map<int,int> cnt;
-    int sum=0; int count=0;
+vector<vector<int>> arr={{1,3},{2,6},{8,10},{15,18}}; 
 
-    for(int i=0;i<arr.size();i++){
-        sum+=arr[i];
-        if(sum==0){
-            count=i+1;
-        }
-        if(cnt.find(sum)!=cnt.end()){
-            count=i-cnt[sum];
-        }
-        else{
-            cnt.insert({sum,i});             //sum with current index
-        }
+vector<vector<int>> res;  
+
+//first sort the array
+
+sort(arr.begin(),arr.end());
+
+for(int i=0;i<arr.size();i++){
+    int starti=arr[i][0];
+    int endi=arr[i][arr[i].size()-1];
+    int j=i+1;
+
+    while(j<arr.size()&&arr[j][0]<=endi){
+        
+
     }
+}
 
-    cout<<count;
 }

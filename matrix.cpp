@@ -97,7 +97,7 @@ int main(){
 
     for(int i=0;i<arr.size();i++){
         sum+=arr[i];
-        if(cnt.contains(sum-k)){ 
+        if(cnt.find(sum-k)!=cnt.end()){ 
             count++;
         }
         cnt[sum]++;
