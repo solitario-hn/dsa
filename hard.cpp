@@ -478,30 +478,242 @@
 //  Given an array of intervals where intervals[i] = [starti, endi], merge all overlapping intervals and return an array of the non-overlapping intervals that cover all the intervals in the input
 
 
-#include <iostream>
+// #include <iostream>
+// #include <vector>
+// #include <algorithm>
+// using namespace std;
+
+// int main(){
+
+// vector<vector<int>> arr={{1,3},{2,6},{5,10},{15,18}}; 
+
+// vector<vector<int>> res;  
+
+// //first sort the array
+
+// sort(arr.begin(),arr.end());
+
+// for(int i=0;i<arr.size(); ){
+//     int starti=arr[i][0];
+//     int endi=arr[i][arr[i].size()-1];
+//     int j=i+1;
+
+//     while(j<arr.size()&&arr[j][0]<=endi){
+//             endi=max(endi,arr[j][1]);   
+//             j++;  //
+        
+//     }
+//     res.push_back({starti,endi});
+//     i=j;
+// }
+
+// for(int  i=0;i<res.size();i++){
+//     for(int j=0;j<res[i].size();j++){
+//         cout<<res[i][j]<<',';
+//     }
+//     cout<<'\n';
+// }
+
+
+// }
+
+
+//MERGE OVERLAPPING OPTIMAL
+
+// #include <iostream>
+// #include <algorithm>
+// #include <vector>
+// using namespace std;
+
+// int main(){
+//     vector<vector<int>> arr={{1,4},{4,5}};
+
+//     vector<vector<int>> res;
+
+//     sort(arr.begin(),arr.end());
+
+//     for(int i=0;i<arr.size();i++){
+//         int starti=arr[i][0];
+//         int endi=arr[i][1];
+
+//         if(res.empty()||res.back()[1]<starti){   //comparing the last value pushe
+//             res.push_back({starti,endi});  
+//         }
+//         else{
+//             endi=max(res.back()[1],endi);
+//             res.back()[1]=endi;
+//         }
+  
+//     }
+
+//     for(int i=0;i<res.size();i++){
+//         for(int j=0;j<res[i].size();j++){
+//             cout<<res[i][j]<<',';
+//         }
+//         cout<<'\n';
+//     }
+
+// }
+
+//Merge two Sorted Arrays Without Extra Space
+
+// #include <iostream>
+// #include <vector>
+// #include <algorithm>
+// using namespace std;
+
+// int main(){
+//     vector<int> arr1={-5, -2, 4, 5, 0, 0, 0};
+//     vector<int> arr2={-3, 1, 8};
+
+//     int i=0; int j=0;
+
+//     while(i<arr1.size()&&j<arr2.size()){
+//         if(arr1[i]==0){
+//             arr1[i]=arr2[j];
+//             j++;
+//         }
+//         i++;
+//     }
+
+//     sort(arr1.begin(),arr1.end());
+
+//     for(int i=0;i<arr1.size();i++){
+//         cout<<arr1[i]<<',';
+//     }
+
+//     cout<<'\n';
+
+// }
+
+
+// #include <algorithm>
+// #include <vector>
+// #include <iostream>
+// using namespace std;
+
+// int main(){
+//     vector<int> arr1={-5, -2, 4, 5, 0, 0, 0};
+//     vector<int> arr2={-6, 1, 8};
+
+//     int n=arr2.size();
+//     int m=arr1.size()-n;
+//     int k=m+n-1;
+
+//     int i=m-1; int j=n-1;
+
+//     while(i>=0 && j>=0){
+
+//         if(arr1[i]>arr2[j]){
+//             arr1[k--]=arr1[i--];  //post decrement operator
+//         }
+//         else{
+//             arr1[k--]=arr2[j--];
+//         }
+//     }
+
+//     while (j >= 0) {
+//             arr1[k--] = arr2[j--];
+//         }
+
+//     for(int i=0;i<m+n;i++){
+//         cout<<arr1[i]<<',';
+//     }
+//     cout<<endl;
+
+// }
+
+
+//Find the repeating and missing numbers
+
+
+// #include <iostream>
+// #include <map>
+// #include <vector>
+// using namespace std;
+
+// int main(){
+//     vector<int> arr={3, 5, 4, 1, 1};
+//     int n=arr.size();
+
+//     map<int,int>cnt;
+
+//     for(int i=0;i<arr.size();i++){
+//         cnt[arr[i]]++;
+//     }
+
+//     int sum=0; int count=0;
+
+//     for(auto x:cnt){
+//         if(x.second>1){
+//             cout<<"Repeating number : "<<x.first<<'\n';
+//         }
+//         sum+=x.first;   
+//     }
+
+//     int missing=(n*(n+1)/2)-sum;
+
+//     cout<<"Missing number:"<<missing<<endl;
+// }
+
+// #include <iostream>
+// #include <vector>
+// #include <map>
+// using namespace std;
+
+// int main(){
+//     vector<int> arr={3, 5, 4, 1, 1};
+//     int repeating=-1; int missing=-1;
+
+//     for(int i=0;i<arr.size();i++){
+
+//         int count=0;
+
+//         for(int j=0;j<arr.size();j++){
+//             if(arr[j]==i){
+//                 count++;
+//             }
+//         }
+
+//         if(count==2){
+//             repeating=i;
+//         }
+//         if(count==0){
+//             missing=i;
+//         }
+//     }
+
+//     cout<<"MISSING NUMBER : "<<missing<< " REPEATING NUMBER : "<<repeating<<endl;
+// }
+
+
+//BETTER APPROACH BAD WAALA MINE IS BETTER THAN THIS 
 #include <vector>
-#include <algorithm>
+#include <iostream>
+#include <map>
 using namespace std;
 
 int main(){
+    vector<int> arr={3, 5, 4, 1, 1};
 
-vector<vector<int>> arr={{1,3},{2,6},{8,10},{15,18}}; 
+    vector<int> occurences(arr.size()+1,0);
 
-vector<vector<int>> res;  
-
-//first sort the array
-
-sort(arr.begin(),arr.end());
-
-for(int i=0;i<arr.size();i++){
-    int starti=arr[i][0];
-    int endi=arr[i][arr[i].size()-1];
-    int j=i+1;
-
-    while(j<arr.size()&&arr[j][0]<=endi){
-        
-
+    for(int i=0;i<arr.size();i++){
+        occurences[arr[i]]++;
     }
-}
+
+    int repeating=-1; int missing=-1;
+
+    for(int j=1;j<=arr.size();j++){
+        if(occurences[j]>1){
+            repeating=j;
+        }
+        if(occurences[j]==0){
+            missing=j;
+        }
+    }
+
+    cout<<"MISSING NUMBER: "<<missing<<"\tREPEATING NUMBER : "<<repeating<<endl;
+
 
 }
