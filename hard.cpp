@@ -688,32 +688,182 @@
 
 
 //BETTER APPROACH BAD WAALA MINE IS BETTER THAN THIS 
-#include <vector>
-#include <iostream>
-#include <map>
-using namespace std;
+// #include <vector>
+// #include <iostream>
+// #include <map>
+// using namespace std;
 
-int main(){
-    vector<int> arr={3, 5, 4, 1, 1};
+// int main(){
+//     vector<int> arr={1, 2, 3, 6, 7, 5, 7};
 
-    vector<int> occurences(arr.size()+1,0);
+//     vector<int> occurences(arr.size()+1,0);
 
-    for(int i=0;i<arr.size();i++){
-        occurences[arr[i]]++;
-    }
+//     for(int i=0;i<arr.size();i++){
+//         occurences[arr[i]]++;
+//     }
 
-    int repeating=-1; int missing=-1;
+//     int repeating=-1; int missing=-1;
 
-    for(int j=1;j<=arr.size();j++){
-        if(occurences[j]>1){
-            repeating=j;
-        }
-        if(occurences[j]==0){
-            missing=j;
-        }
-    }
+//     for(int j=1;j<=arr.size();j++){
+//         if(occurences[j]>1){
+//             repeating=j;
+//         }
+//         if(occurences[j]==0){
+//             missing=j;
+//         }
+//     }
 
-    cout<<"MISSING NUMBER: "<<missing<<"\tREPEATING NUMBER : "<<repeating<<endl;
+//     cout<<"MISSING NUMBER: "<<missing<<"\tREPEATING NUMBER : "<<repeating<<endl;
 
 
-}
+// }
+
+
+//OPTIMAL APPROACH 1  , SKIPPING OPTIMAL APPROACH 2 XOR 
+
+// #include <iostream>
+// #include <cmath>
+// #include <vector>
+// #include <map>
+// using namespace std;
+
+// int main(){
+//     vector<int> arr={1, 2, 3, 6, 7, 5, 7};
+
+//     int Sn; int Ssn;  //sum of n natural no and sum of sqaure
+//     int S=0; int Ss=0;  //sum of numbers in array and sum of sqaures;
+
+//     int n=arr.size();
+
+//     Sn=(n*(n+1)/2);  //sum of n natural numbers
+//     Ssn=((n*(n+1)*(2*n+1))/6) ;    //sum of sqaure of n numbers
+
+//     for(int i=0;i<n;i++){
+//         S+=arr[i];
+//         Ss+=pow(arr[i],2);
+//     }
+
+//     int val1=S-Sn;    int val2=Ss-Ssn;
+
+//     val2=val2/val1;
+
+//     //Repeating Number
+//     int x=(val1+val2)/2;
+
+//     //Missing number
+//     int y=x-val1;
+
+//     cout<<"Repeating number: "<<x;
+
+//     cout<<" Missing number:  "<<y<<endl;
+// }
+
+//COUNT INVERSION BRUTE 
+// #include <iostream>
+// #include <vector>
+// using namespace std;
+
+// int main(){
+//     vector<int> arr={5,3,2,1,4};
+
+//     int count=0;
+
+//     for(int i=0;i<arr.size();i++){
+//         for(int j=i+1;j<arr.size();j++){
+//             if(arr[i]>arr[j]){
+//                 count++;
+//             }
+//         }
+//     }
+
+//     cout<<"INVERSIONS: "<<count<<'\n';
+// }
+
+//COUNT INVERSIONS OPTIMAL
+
+
+
+
+//REVERSE PAIRS
+
+// #include <iostream>
+// #include <vector>
+// using namespace std;
+
+// int main(){
+//     vector<int> arr={3,2,1,4};
+
+//     int count=0;
+
+//     for(int i=0;i<arr.size();i++){
+//         for(int j=i+1;j<arr.size();j++){
+//             if(arr[i]>(2*arr[j])){
+//                 count++;
+//             }
+//         }
+//     }
+
+//     cout<<"REVERSE PAIRS: "<<count<<'\n';
+// }
+
+
+
+//Maximum Product Subarray in an Array //BRUTE
+
+// #include <iostream>
+// #include <vector>
+// #include <algorithm>
+// using namespace std;
+
+// int main(){
+//     vector<int> arr={1,2,-3,0,-4,-5};
+
+
+//     int maxi=1;
+
+//     for(int i=0;i<arr.size();i++){
+//         int prod=1;
+//         for(int j=i;j<arr.size();j++){
+//             prod*=arr[j];
+//             maxi=max(maxi,prod);
+//         }
+//     }
+
+//     cout<<"Maximum subarray product: "<<maxi;
+
+// }
+
+//OPTIMAL APPRAOCH-1 USING WHATEVR
+
+
+// #include <iostream>
+// #include <vector>
+// #include <algorithm>
+// using namespace std;
+
+// int main(){
+//     vector<int> arr={1,2,-3,0,-4,-5};
+
+//     int leftprod=1; int rightprod=1; int maxprod=1; 
+//     // int max1=1; int max2=1;
+//     int n=arr.size();
+
+//     for(int i=0;i<n;i++){
+//         if(arr[i]==0){
+//             leftprod=1;           
+//         }
+//         if(arr[n-1-i]==0){
+//             rightprod=1;
+//         }
+//         leftprod*=arr[i];
+//         rightprod*=arr[n-1-i];
+//         maxprod=max(maxprod,max(leftprod,rightprod));
+//         // max1=max(leftprod,max1);
+//         // max2=max(rightprod,max2);  BETTER CODE HERE
+//     }
+//     // cout<<"MAXIMUM PRODUCT: "<<max(max1,max2)<<'\n';
+//     cout<<"MAXIMUM PRODUCT: "<<maxprod;
+// }
+
+
+//OPTIMAL APPROACH 2 
