@@ -332,3 +332,128 @@
 
 
 // }
+
+
+//Count Occurrences in Sorted Array
+//BRUTE FORCE 
+
+// #include <iostream>
+// #include <vector>
+// using namespace std;
+
+
+// int main(){
+//     vector<int> arr={2, 2 , 3 , 3 , 3 , 3 , 4};
+//     int occur=0;
+//     int x=3;
+
+//     for(int i=0;i<arr.size();i++){
+//         if(arr[i]==x){
+//             occur++;
+//         }
+//     }
+
+//     cout<<"OCCURENCES IN THE ARRAY: "<<occur<<endl;
+// }
+
+//USING BINARY SEARCH
+
+// #include <iostream>
+// #include <vector>
+// using namespace std;
+
+
+// void countOccur(vector<int> &arr,int left , int right , int tar ,int *occur){
+//     if(left>right) return;
+
+//     int mid=(left+right)/2;
+
+//     if(arr[mid]==tar){     //if(arr[mid]==tar)
+//         *(occur)+=1;
+//         countOccur(arr,mid+1,right , tar , occur);   
+//         countOccur(arr, left , mid-1, tar , occur);
+//         return; //instead of return countOccur(arr,mid+1,right , tar , occur); return countOccur(arr, left , mid-1, tar , occur);
+//         countOccur(arr, left , mid-1, tar , occur);
+//     }
+//     if(arr[mid]>tar){
+//         return countOccur(arr,left , mid-1 , tar , occur);
+//     }
+//     else{  //arr[mid]>tar
+//         return countOccur(arr , mid+1 , right , tar , occur);
+//     }
+
+// }
+
+
+// int main(){
+//     vector<int> arr={1, 1, 2, 2, 2, 2, 2, 3};
+
+//     int left=0;
+//     int right=arr.size()-1;
+//     int occur=0;
+//     int tar=2;
+
+//     countOccur(arr , left , right , tar , &occur);
+
+
+//     cout<<"OCCURENCES IN THE ARRAY: "<<occur<<endl;
+
+
+// }
+
+
+//Search Element in a Rotated Sorted Array
+//Given an integer array nums, sorted in ascending order (with distinct values) and a target value k. 
+//The array is rotated at some pivot point that is unknown. Find the index at which k is present and if k is not present return -1.
+
+//BRUTE FORCE 
+// #include <iostream>
+// #include <vector>
+// using namespace std;
+
+// int main(){
+//     vector<int> arr={4, 5, 6, 7, 0, 1, 2};
+//     int tar=0;
+
+//     for(int i=0;i<arr.size();i++){
+//         if(arr[i]==tar){
+//             cout<<i<<endl;
+//             break;
+//         }
+//     }
+// }
+
+//BINARY SEARCH
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+void SearchRotatedArray(vector<int> arr , int tar , int left , int right , int *index){
+    if(left>right) return;
+
+    int mid=(left+right)/2;
+
+    if(arr[mid]==tar){
+        *index=mid;
+        return;
+    }   
+    if(arr[mid]>tar){
+        return SearchRotatedArray(arr , tar , mid+1 , right , index);
+    }
+    else{
+        return SearchRotatedArray(arr , tar , left , mid-1  , index);
+    }
+}
+
+int main(){
+    vector<int> arr={4, 5, 6, 7, 0, 1, 2};
+    int tar=0;
+    int left=0;
+    int right=arr.size()-1;
+    int index=-1;
+
+    SearchRotatedArray(arr , tar ,left , right ,&index);
+
+    cout<<"INDEX FOUND AT: "<<index;   
+}
