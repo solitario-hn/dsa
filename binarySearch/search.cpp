@@ -425,35 +425,114 @@
 
 //BINARY SEARCH
 
+// #include <iostream>
+// #include <vector>
+// using namespace std;
+
+// void SearchRotatedArray(vector<int> arr , int tar , int left , int right , int *index){
+//     if(left>right) return;
+
+//     int mid=(left+right)/2;
+
+//     if(arr[mid]==tar){
+//         *index=mid;
+//         return;
+//     }   
+//     if(arr[mid]>tar){
+//         return SearchRotatedArray(arr , tar , mid+1 , right , index);
+//     }
+//     else{
+//         return SearchRotatedArray(arr , tar , left , mid-1  , index);
+//     }
+// }
+
+// int main(){
+//     vector<int> arr={4, 5, 6, 7, 0, 1, 2};
+//     int tar=0;
+//     int left=0;
+//     int right=arr.size()-1;
+//     int index=-1;
+
+//     SearchRotatedArray(arr , tar ,left , right ,&index);
+
+//     cout<<"INDEX FOUND AT: "<<index;   
+// }
+
+
+//Search Element in a Rotated Sorted Array
+
+//Given an integer array nums, sorted in ascending order (with distinct values) and a target value k. 
+//The array is rotated at some pivot point that is unknown. Find the index at which k is present and if k is not present return -1.
+
+
+//BRUTE FORCE
+// #include <iostream>
+// #include <vector>
+// using namespace std;
+
+// int main(){
+//     vector<int> arr={4, 5, 6, 7, 0, 1, 2};
+//     int tar=0;
+//     int pos=-1;
+
+//     for(int i=0;i<arr.size();i++){
+//         if(arr[i]==tar){
+//         pos=i;
+//         break;
+//         }
+//     }
+//     cout<<"The position of the target is: "<<pos<<endl;
+// }
+
+
+//OPTIMAL APPROACH 
+
 #include <iostream>
 #include <vector>
 using namespace std;
 
-void SearchRotatedArray(vector<int> arr , int tar , int left , int right , int *index){
-    if(left>right) return;
+void findTarget(vector<int> &arr , int left , int right , int *pos , int tar){
+    if(left>right) return ; 
 
-    int mid=(left+right)/2;
+    while(left <= right){
+        int mid=(left+right)/2;
+        if(arr[mid]==tar) {
+            *pos=mid;
+            return; 
+        }
 
-    if(arr[mid]==tar){
-        *index=mid;
-        return;
-    }   
-    if(arr[mid]>tar){
-        return SearchRotatedArray(arr , tar , mid+1 , right , index);
-    }
-    else{
-        return SearchRotatedArray(arr , tar , left , mid-1  , index);
-    }
-}
+        if(arr[left]<=arr[mid]){       
+            if(arr[left]<=tar && arr[mid]>tar){
+                return findTarget(arr , left , mid-1 , pos , tar);    
+                 
+            }
+            else{
+                return findTarget(arr , mid+1 , right , pos , tar);
+
+            }
+        }
+        else{  //if(arr[right]>arr[mid]) if the right array is sorted. 
+            if(arr[right]>=tar && arr[mid] < tar){
+                return findTarget(arr , mid+1 , right , pos , tar);
+            }
+            else{
+                return findTarget(arr , left , mid-1 , pos , tar);
+
+            }
+        }
+}}
 
 int main(){
     vector<int> arr={4, 5, 6, 7, 0, 1, 2};
-    int tar=0;
+    int pos=-1;
     int left=0;
     int right=arr.size()-1;
-    int index=-1;
+    int tar=2;
 
-    SearchRotatedArray(arr , tar ,left , right ,&index);
+    findTarget(arr , left ,right , &pos , tar);
 
-    cout<<"INDEX FOUND AT: "<<index;   
+    cout<<pos<<endl;
+
+
 }
+
