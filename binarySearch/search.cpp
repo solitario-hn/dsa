@@ -487,52 +487,174 @@
 
 //OPTIMAL APPROACH 
 
+// #include <iostream>
+// #include <vector>
+// using namespace std;
+
+// void findTarget(vector<int> &arr , int left , int right , int *pos , int tar){
+//     if(left>right) return ; 
+
+//     while(left <= right){
+//         int mid=(left+right)/2;
+//         if(arr[mid]==tar) {
+//             *pos=mid;
+//             return; 
+//         }
+
+//         if(arr[left]<=arr[mid]){       
+//             if(arr[left]<=tar && arr[mid]>tar){
+//                 return findTarget(arr , left , mid-1 , pos , tar);    
+                 
+//             }
+//             else{
+//                 return findTarget(arr , mid+1 , right , pos , tar);
+
+//             }
+//         }
+//         else{  //if(arr[right]>arr[mid]) if the right array is sorted. 
+            // if(arr[right]>=tar && arr[mid] < tar){
+            //     return findTarget(arr , mid+1 , right , pos , tar);
+            // }
+            // else{
+            //     return findTarget(arr , left , mid-1 , pos , tar);
+
+            // }
+//         }
+// }}
+
+// int main(){
+//     vector<int> arr={4, 5, 6, 7, 0, 1, 2};
+//     int pos=-1;
+//     int left=0;
+//     int right=arr.size()-1;
+//     int tar=2;
+
+//     findTarget(arr , left ,right , &pos , tar);
+
+//     cout<<pos<<endl;
+
+
+// }
+
+
+//Search Element in Rotated Sorted Array II
+//Given an integer array arr of size N, sorted in ascending order (may contain duplicate values) and a target value k. 
+//Now the array is rotated at some pivot point unknown to you. Return True if k is present and otherwise, return False. (change duplicate values,)
+
+//OPTIMAL APPAORACH
+// #include <iostream>
+// #include <vector>
+// using namespace std;
+
+// void searchRotatedArray(vector<int> &arr , int left , int right , int tar , bool *ans){
+//     if(left>right)  return;
+
+//     while(left<=right){
+//         int mid=(left+right)/2;
+
+//         if(arr[mid]==tar){
+//             *(ans)=true; return;
+//         }
+
+//         //to fast
+//         if(arr[mid]==arr[left]){
+//             left++;
+//             continue;  //new left new right
+//         }
+
+//         if(arr[mid]==arr[right]){
+//             right--;
+//             continue;
+//         }
+
+//         if(arr[left]<=arr[mid]){
+//             if(arr[left]<=tar && arr[mid]>=tar){
+//                 return searchRotatedArray(arr, left , mid-1 , tar , ans);
+//             }
+//             else{
+//                 return searchRotatedArray(arr , mid+1 , right , tar , ans);
+//             }
+//         }
+//         else{   //arr[right]>=arr[mid]
+//             if(arr[right]>=tar && arr[mid] <=tar){
+//                 return searchRotatedArray(arr , mid+1 , right , tar , ans);
+//             }
+//             else{
+//                 return searchRotatedArray(arr , left , mid-1 , tar , ans);
+
+//             }
+//         }
+//     }
+// }
+
+
+
+// int main(){
+//     vector<int> arr={7, 8, 1,1,1, 2, 3, 3, 3, 4, 5, 6};
+//     int tar=3;
+//     int left=0;
+//     int right=arr.size()-1;
+//     bool ans=false;
+
+//     searchRotatedArray(arr,left,right,tar,&ans);
+
+//     cout<<ans<<endl;
+
+// }
+
+//Minimum in Rotated Sorted Array
+//Given an integer array arr of size N, sorted in ascending order (with distinct values), the array is rotated at any index which is unknown.
+// Find the minimum element in the array.
+
+//Brute force
+// #include <iostream>
+// #include <vector>
+// #include <climits>
+// using namespace std;
+
+// int main(){
+//     vector<int> arr={4,5,6,7,0,1,2,3};
+//     int smallest=INT_MAX;
+
+//     for(int i=0 ; i<arr.size() ; i++){
+//         if(arr[i]<smallest){
+//             smallest=arr[i];
+//         }
+//     }
+
+//     cout<<smallest<<endl;
+// }
+
+
+//Optimal   Approach
 #include <iostream>
 #include <vector>
 using namespace std;
 
-void findTarget(vector<int> &arr , int left , int right , int *pos , int tar){
-    if(left>right) return ; 
+int  minimumValue(vector<int> &arr, int left , int right){
+    if(left>=right){
+        return arr[left];
+    } 
 
-    while(left <= right){
+    //ye tere phle waala qus nhi h smjh aayi kyaaa s
         int mid=(left+right)/2;
-        if(arr[mid]==tar) {
-            *pos=mid;
-            return; 
-        }
 
-        if(arr[left]<=arr[mid]){       
-            if(arr[left]<=tar && arr[mid]>tar){
-                return findTarget(arr , left , mid-1 , pos , tar);    
-                 
-            }
-            else{
-                return findTarget(arr , mid+1 , right , pos , tar);
-
-            }
+        if(arr[mid]>arr[right]){
+            return minimumValue(arr , mid+1 , right);
         }
-        else{  //if(arr[right]>arr[mid]) if the right array is sorted. 
-            if(arr[right]>=tar && arr[mid] < tar){
-                return findTarget(arr , mid+1 , right , pos , tar);
-            }
-            else{
-                return findTarget(arr , left , mid-1 , pos , tar);
-
-            }
+        else{
+            return minimumValue(arr , left , mid);
         }
-}}
+}
+
+
 
 int main(){
-    vector<int> arr={4, 5, 6, 7, 0, 1, 2};
-    int pos=-1;
+    vector<int> arr={4,5,6,7,-1,0,1,2,3};
     int left=0;
     int right=arr.size()-1;
-    int tar=2;
 
-    findTarget(arr , left ,right , &pos , tar);
-
-    cout<<pos<<endl;
+    cout<<"MINIMUM VALUE IN THE ARRAY: "<<minimumValue(arr , left , right)<<endl;
 
 
 }
-
