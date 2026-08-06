@@ -627,34 +627,204 @@
 
 
 //Optimal   Approach
+// #include <iostream>
+// #include <vector>
+// using namespace std;
+
+// int  minimumValue(vector<int> &arr, int left , int right){
+//     if(left>=right){
+//         return arr[left];
+//     } 
+//     //ye tere phle waala qus nhi h smjh aayi kyaaa s
+//         int mid=(left+right)/2;
+
+//         if(arr[mid]>arr[right]){
+//             return minimumValue(arr , mid+1 , right);
+//         }
+//         else{
+//             return minimumValue(arr , left , mid);
+//         }
+// }
+
+
+
+// int main(){
+//     vector<int> arr={4,5,6,7,-1,0,1,2,3};
+//     int left=0;
+//     int right=arr.size()-1;
+
+//     cout<<"MINIMUM VALUE IN THE ARRAY: "<<minimumValue(arr , left , right)<<endl;
+
+
+// }
+
+
+//Find out how many times the array has been rotated
+//Given an integer array arr of size N, sorted in ascending order (with distinct values). 
+//Now the array is rotated between 1 to N times which is unknown. Find how many times the array has been rotated.
+
+
+// #include <iostream>
+// #include <vector>
+// using namespace std;
+
+
+// int rotatedTimes(vector<int> &arr , int left ,int right){
+//     if(left >= right){
+//         return left;
+//     }
+
+//     if(arr[left]<arr[right]){
+//         return left;
+//     }
+
+//     int mid=(left+right)/2;
+
+//     if(arr[left]<=arr[mid]){
+//         return rotatedTimes(arr , mid+1 , right);
+//     }
+//     else{ //if (arr[left]>arr[mid])
+//         return rotatedTimes(arr , left, mid);
+//     }
+// }
+
+// int main(){
+//     vector<int> arr={4,5,6,7,0,1,2,3};  // 0 1 2 3 4 5 6 // 4 5 6 7 0 1 2 (right to left ) // 4 5 6 7 0 1 2 
+//     int left=0;
+//     int right=arr.size()-1;
+
+//     cout<<"NO. OF ROTATED TIMES OF ARRAY: "<<rotatedTimes(arr , left , right)<<endl;
+
+
+// }
+
+
+// #include <iostream>
+// #include <vector>
+// using namespace std;
+
+// int rotatedTimes(vector<int> &arr , int left , int right){
+//     if(left>=right){
+//         return left;
+//     }
+//     int mid=(left+right)/2;
+
+//     if(arr[right]<arr[mid]){
+//         return rotatedTimes(arr , mid+1 , right);
+//     }
+//     else{
+//         return rotatedTimes( arr , left , mid);
+//     }
+// }
+
+// int main(){
+//     vector<int> arr={4,5,6,7,0,1,2,3};
+//     int left=0;
+//     int right=arr.size()-1;
+
+//     cout<<"NO. OF ROTATED TIMES OF ARRAY: "<<rotatedTimes(arr , left , right)<<endl;
+// }
+
+
+//Search Single Element in a sorted array
+
+//Given an array of N integers. Every number in the array except one appears twice. Find the single number in the array.
+
+//USING XOR
+// #include <iostream>
+// #include <vector>
+// using namespace std;
+
+// int main(){
+//     vector<int> arr={1,1,2,2,3,3,4,5,5,6,6};
+
+//     int uniq=0;
+
+//     for(int i=0 ; i<arr.size(); i++){
+//         uniq^=arr[i];
+//     }
+
+//     cout<<"UNIQUE ELEMENT OCCURENCE ONE: "<<uniq<<endl;
+// }
+
+
+
+//USING BINARY SEARCH 
+
+// #include <iostream>
+// #include <vector>
+// using namespace std;
+
+// void singeElement(vector<int> &arr , int left , int right , int *ans){
+//     while(left<right){
+//         int mid=(left+right)/2;
+
+//         if(arr[left]<arr[mid]){
+//             if(arr[left+1]==arr[left]){
+//                 left+=2;
+//             }
+//             else{
+//                 *(ans)=arr[left];
+//                 return;
+//             }
+//         }
+//         else{
+//             if(arr[right]>arr[mid]){
+//                 if(arr[right-1]==arr[right]){
+//                     right-=2;
+//                 }
+//                 else{
+//                     *(ans)=arr[right];
+//                     return;
+//                 }
+//             }
+
+//         }
+
+//     }
+// }
+
+// int main(){
+//     vector<int> arr={1,1,2,2,3,3,4,5,5,6,6};
+//     int left=0;
+//     int right=arr.size()-1;
+//     int ans=0;
+
+//     singeElement(arr , left , right , &ans);
+
+//     cout<<"SINGLE ELEMENT FOUND: "<<ans<<endl;
+// }
+
+
+
 #include <iostream>
 #include <vector>
 using namespace std;
 
-int  minimumValue(vector<int> &arr, int left , int right){
-    if(left>=right){
-        return arr[left];
-    } 
-
-    //ye tere phle waala qus nhi h smjh aayi kyaaa s
+int singleElement(vector<int> &arr, int left ,int right){
+    
+    while(left<right){
         int mid=(left+right)/2;
 
-        if(arr[mid]>arr[right]){
-            return minimumValue(arr , mid+1 , right);
+        if(mid%2==1){
+            mid--;
+        }
+        if(arr[mid]==arr[mid+1]){
+            left=mid+2;
         }
         else{
-            return minimumValue(arr , left , mid);
+            right=mid;
         }
+    }
+    return arr[left];
 }
 
-
-
 int main(){
-    vector<int> arr={4,5,6,7,-1,0,1,2,3};
+    vector<int> arr={1,1,2,2,3,3,4,5,5,6,6};
     int left=0;
     int right=arr.size()-1;
 
-    cout<<"MINIMUM VALUE IN THE ARRAY: "<<minimumValue(arr , left , right)<<endl;
+    cout<<"UNIQUE ELEMENT OCCURENCE ONE: "<<singleElement(arr , left , right)<<endl;
 
 
 }
